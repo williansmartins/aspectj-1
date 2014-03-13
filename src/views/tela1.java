@@ -1,4 +1,5 @@
-package br.com.fiap.aop.view;
+package views;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -23,48 +24,53 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
-import br.com.fiap.aop.model.Compra;
-import br.com.fiap.aop.model.Item;
-import br.com.fiap.aop.model.Produto;
+import aspects.exercicio5.model.Compra;
+import aspects.exercicio5.model.Item;
+import aspects.exercicio5.model.Produto;
 
+public class tela1 extends JFrame
+{
 
-public class tela1 extends JFrame {
-	
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField txtNroPedido;
-	private JTextField txtQuantidade;
-	private JTable tbProdutos;
-	private Compra compra = new Compra();
-	List<Produto> produtos = new ArrayList<Produto>();
-	JComboBox<Produto> cbProduto = new JComboBox();
-	private JTextField textField;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					tela1 frame = new tela1();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField txtNroPedido;
+    private JTextField txtQuantidade;
+    private JTable tbProdutos;
+    private Compra compra = new Compra();
+    List<Produto> produtos = new ArrayList<Produto>();
+    JComboBox<Produto> cbProduto = new JComboBox<Produto>();
+    private JTextField textField;
 
-	/**
-	 * Create the frame.
-	 */
-	public tela1() {
-		cbProduto.setRenderer(new ListCellRenderer() {
-		    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    /**
+     * Launch the application.
+     */
+    public static void main( String[] args )
+    {
+	EventQueue.invokeLater( new Runnable()
+	{
+	    public void run( )
+	    {
+		try
+		{
+		    tela1 frame = new tela1();
+		    frame.setVisible( true );
+		    frame.setLocationRelativeTo( null );
+		} catch ( Exception e )
+		{
+		    e.printStackTrace();
+		}
+	    }
+	} );
+    }
+
+    /**
+     * Create the frame.
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public tela1() {
+		cbProduto.setRenderer(new ListCellRenderer<Object>() {
+		    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 		        Produto p = new Produto();
 		        p = (Produto) value;
 		    	final JLabel renderer = new JLabel(p.getDescricao());
@@ -103,7 +109,7 @@ public class tela1 extends JFrame {
 		lblProduto.setBounds(10, 134, 68, 14);
 		contentPane.add(lblProduto);
 		
-		JComboBox cbTipoCliente = new JComboBox();
+		JComboBox<?> cbTipoCliente = new JComboBox();
 		cbTipoCliente.setModel(new DefaultComboBoxModel(new String[] {"F\u00EDsico", "Jur\u00EDdico"}));
 		cbTipoCliente.setBounds(79, 57, 129, 22);
 		contentPane.add(cbTipoCliente);
@@ -127,7 +133,7 @@ public class tela1 extends JFrame {
 				
 				DefaultTableModel model = (DefaultTableModel) tbProdutos.getModel();
 				//"Id produto", "Desc Produto", "Valor unit\u00E1rio", "QTD", "Desconto", "Total"
-				model.addRow(new Object[]{produtoSelecionado.getCodigo(), produtoSelecionado.getDescricao(), produtoSelecionado.getPreco(), txtQuantidade.getText(), 0, produtoSelecionado.getPreco().doubleValue() * Double.parseDouble(txtQuantidade.getText() });
+				model.addRow(new Object[]{produtoSelecionado.getCodigo(), produtoSelecionado.getDescricao(), produtoSelecionado.getPreco(), txtQuantidade.getText(), 0, produtoSelecionado.getPreco().doubleValue() * Double.parseDouble(txtQuantidade.getText() ) });
 				
 				
 				if (hasProductInItem(compra.getItens(), produtoSelecionado)) {
