@@ -46,25 +46,4 @@ public class Main
 	    }
 	}
     }
-
-    public void aplicarDescontoApartirDeHojeDe10EmClientesQueEfetuaramAoMenos1CompraEmFevereiro( )
-    {
-
-    }
-
-    public void excluirTodosClientesAntigos( List<Cliente> lista )
-    {
-
-    }
-
-    public void imprimePercentualDePedidosEComprasAPartirDeUmaReserva( Reserva reserva )
-    {
-
-    }
-
 }
-
-// Another head hangs lowly
-// child is slowly taken
-// and The violence caused silence
-// who are we mistaken
